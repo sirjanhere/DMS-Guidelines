@@ -1,0 +1,125 @@
+# Function to create an adjacency matrix from a list of vertices and edges
+def create_adjacency_matrix(vertices, edges):
+    """
+    Create adjacency matrix from vertices and edges
+    
+    Args:
+        vertices: list of vertices (e.g., ['A', 'B', 'C'])
+        edges: list of edges as tuples (e.g., [('A', 'B'), ('B', 'C'), ('A', 'C')])
+    
+    Returns:
+        adjacency_matrix: n x n matrix representing the graph
+    """
+    # Get the number of vertices in the graph
+    n = len(vertices)
+    
+    # Initialize an n x n matrix filled with zeros
+    adj_matrix = [[0 for _ in range(n)] for _ in range(n)]
+    
+    # Create a dictionary to map each vertex to its index (e.g., {'A': 0, 'B': 1, 'C': 2})
+    vertex_index = {v: i for i, v in enumerate(vertices)}
+    
+    # Loop through each edge in the edges list
+    for u, v in edges:
+        # Get the indices of the vertices in the edge
+        i = vertex_index[u]
+        j = vertex_index[v]
+        
+        # Mark the edge in the adjacency matrix (since it's undirected, set both [i][j] and [j][i] to 1)
+        adj_matrix[i][j] = 1
+        adj_matrix[j][i] = 1  # Undirected graph
+    
+    # Return the completed adjacency matrix
+    return adj_matrix
+
+
+# Function to check if a graph is complete (every pair of distinct vertices is connected)
+def is_complete_graph(adj_matrix):
+    """
+    Check if adjacency matrix represents a complete graph
+    
+    Args:
+        adj_matrix: adjacency matrix of the graph
+    
+    Returns:
+        True if complete graph, False otherwise
+    """
+    # Get the size of the adjacency matrix (number of vertices)
+    n = len(adj_matrix)
+    
+    # Loop through each cell in the matrix
+    for i in range(n):
+        for j in range(n):
+            # Check diagonal (self-loops not allowed in a complete graph)
+            if i == j:
+                if adj_matrix[i][j] != 0:  # No self-loops allowed
+                    return False
+            # Check off-diagonal (every pair must be connected)
+            else:
+                if adj_matrix[i][j] != 1:
+                    return False
+    # If all checks pass, the graph is complete
+    return True
+
+
+# Function to print the adjacency matrix with row and column labels
+def print_adjacency_matrix(vertices, matrix):
+    """Print the adjacency matrix with row and column labels"""
+    print("\nAdjacency Matrix:")
+    
+    # Print column headers (vertex labels)
+    print("   ", end="")
+    for v in vertices:
+        print(f"{v:>2} ", end="")  # Right-aligned for neat formatting
+    print()  # Newline after headers
+    
+    # Print each row with its vertex label
+    for i in range(len(vertices)):
+        print(f"{vertices[i]}: ", end="")  # Row label
+        for val in matrix[i]:
+            print(f"{val:>2} ", end="")  # Print each cell value
+        print()  # Newline after each row
+
+
+# Main function to run the program
+def main():
+    print("Graph Completeness Checker")
+    
+    # Get vertices from user input (e.g., "A B C D")
+    print("Enter vertices separated by spaces (e.g., A B C D):")
+    vertices = input().split()  # Splits input into a list (e.g., ['A', 'B', 'C', 'D'])
+    
+    # Get edges from user input (e.g., "AB BC AC AD BD CD")
+    print("Enter edges as pairs separated by spaces (e.g., AB BC AC AD BD CD):")
+    edge_input = input().split()  # Splits into a list (e.g., ['AB', 'BC', 'AC', ...])
+    
+    # Convert edge strings into tuples (e.g., 'AB' becomes ('A', 'B'))
+    edges = [(e[0], e[1]) for e in edge_input]
+    
+    # Generate the adjacency matrix
+    adj_matrix = create_adjacency_matrix(vertices, edges)
+    
+    # Check if the graph is complete
+    complete = is_complete_graph(adj_matrix)
+    
+    # Print the adjacency matrix
+    print_adjacency_matrix(vertices, adj_matrix)
+    
+    # Print whether the graph is complete
+    if complete:
+        print("\nThe graph is a complete graph (clique).")
+    else:
+        print("\nThe graph is NOT a complete graph.")
+        print("Missing edges:")
+        
+        # Find and print missing edges (only upper triangle to avoid duplicates)
+        n = len(vertices)
+        for i in range(n):
+            for j in range(i+1, n):  # j starts from i+1 to avoid checking same pair twice
+                if adj_matrix[i][j] == 0:  # If no edge exists
+                    print(f"{vertices[i]}-{vertices[j]}", end=" ")  # Print missing edge
+
+
+# Entry point of the program
+if __name__ == "__main__":
+    main()
