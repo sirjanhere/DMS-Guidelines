@@ -1,0 +1,28 @@
+A = {1, 2, 3, 4}
+B = {3, 4, 5, 6}
+
+# Union
+print(A | B)  # {1, 2, 3, 4, 5, 6}
+
+# Intersection
+print(A & B)  # {3, 4}
+
+# Difference
+print(A - B)  # {1, 2}
+
+# Symmetric Difference
+print(A ^ B)  # {1, 2, 5, 6}
+
+# Subset
+print(A <= B)  # False
+
+# Superset
+print(A >= B)  # False
+
+# Disjoint
+print(A.isdisjoint(B))  # False
+
+# Get the length of the set
+length_of_A = len(A)
+
+print(length_of_A)  # Output will be 4, since there are 4 elements in A
