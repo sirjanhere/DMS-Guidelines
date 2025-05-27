@@ -1,0 +1,25 @@
+# Function to solve the linear congruence ax ≡ b (mod m) using brute-force
+def solve_linear_congruence(a, b, m):
+    solutions = []  # List to store all solutions
+    
+    # Iterate through all possible values of x from 0 to m-1
+    for x in range(m):
+        if (a * x) % m == b % m:  # Check if ax ≡ b (mod m)
+            solutions.append(x)
+    
+    return solutions
+
+# Input from the user
+a = int(input("Enter the value of a: "))
+b = int(input("Enter the value of b: "))
+m = int(input("Enter the value of m: "))
+
+# Solve the congruence
+solutions = solve_linear_congruence(a, b, m)
+
+# Display the results
+if not solutions:
+    print("No solutions exist for the congruence.")
+else:
+    print(f"The solutions to the congruence {a}x ≡ {b} (mod {m}) are: {solutions}")
+
