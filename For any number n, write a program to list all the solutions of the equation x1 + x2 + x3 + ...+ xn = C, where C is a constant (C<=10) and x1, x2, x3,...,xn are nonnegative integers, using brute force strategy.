@@ -1,0 +1,13 @@
+from itertools import product
+
+def find_solutions(n, C):
+    return [comb for comb in product(range(C + 1), repeat=n) if sum(comb) == C]
+
+# Input from user
+n = int(input("Enter the number of variables (n): "))
+C = int(input("Enter the constant (C): "))
+
+# Find and print solutions
+solutions = find_solutions(n, C)
+for sol in solutions:
+    print(sol)
