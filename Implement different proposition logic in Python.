@@ -1,0 +1,74 @@
+def AND(p, q):
+    return p and q
+
+def NAND(p, q):
+    return not (p and q)
+
+def OR(p, q):
+    return p or q
+
+def NOR(p, q):
+    return not (p or q)
+
+def XOR(p, q):
+    return p ^ q
+
+def XNOR(p, q):
+    return not (p ^ q)
+
+def IMPLIES(p, q):
+    return not p or q
+
+def IMPLIES_REVERSE(p, q):
+    return not q or p
+
+def BICONDITIONAL(p, q):
+    return p == q
+
+def NOT_P(p, q):
+    return not p
+
+def NOT_Q(p, q):
+    return not q
+
+def P_ONLY(p, q):
+    return p
+
+def Q_ONLY(p, q):
+    return q
+
+def CONTRADICTION(p, q):
+    return False
+
+def TAUTOLOGY(p, q):
+    return True
+
+# Get user input
+p = input("Enter value for P (True/False): ").strip().lower() == "true"
+q = input("Enter value for Q (True/False): ").strip().lower() == "true"
+
+# Display results
+operations = {
+    "AND": AND,
+    "NAND": NAND,
+    "OR": OR,
+    "NOR": NOR,
+    "XOR": XOR,
+    "XNOR": XNOR,
+    "IMPLIES": IMPLIES,
+    "IMPLIES_REVERSE": IMPLIES_REVERSE,
+    "BICONDITIONAL": BICONDITIONAL,
+    "NOT P": NOT_P,
+    "NOT Q": NOT_Q,
+    "P ONLY": P_ONLY,
+    "Q ONLY": Q_ONLY,
+    "CONTRADICTION": CONTRADICTION,
+    "TAUTOLOGY": TAUTOLOGY
+}
+
+print("\nTruth Table:")
+print("-------------------------------------------")
+print("Operation         | Output")
+print("-------------------------------------------")
+for name, func in operations.items():
+    print(f"{name:<18} | {func(p, q)}")
