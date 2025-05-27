@@ -1,0 +1,46 @@
+# Import the itertools module which provides functions for creating iterators for efficient looping
+import itertools
+
+# Function to generate permutations without repetition
+def permutations_without_repetition(digits):
+    # Use itertools.permutations to generate all possible permutations of the digits
+    # The length of each permutation is the same as the number of digits
+    perms = itertools.permutations(digits)
+    
+    # Convert the permutations from tuples to strings for easier reading
+    # and print each permutation
+    for perm in perms:
+        print(''.join(perm))
+
+# Function to generate permutations with repetition
+def permutations_with_repetition(digits, length):
+    # Use itertools.product to generate all possible permutations with repetition
+    # The 'repeat' parameter specifies the length of each permutation
+    perms = itertools.product(digits, repeat=length)
+    
+    # Convert the permutations from tuples to strings for easier reading
+    # and print each permutation
+    for perm in perms:
+        print(''.join(perm))
+
+# Ask the user for input: the set of digits
+digits = input("Enter the set of digits (e.g., '123'): ")
+
+# Ask the user if they want permutations with or without repetition
+choice = input("Do you want permutations with repetition? (yes/no): ").strip().lower()
+
+# Check the user's choice
+if choice == 'no':
+    # Generate and print permutations without repetition
+    print("\nPermutations without repetition:")
+    permutations_without_repetition(digits)
+elif choice == 'yes':
+    # Ask the user for the length of permutations
+    length = int(input("Enter the length of each permutation: "))
+    # Generate and print permutations with repetition
+    print("\nPermutations with repetition:")
+    permutations_with_repetition(digits, length)
+else:
+    # Handle invalid input
+    print("Invalid choice. Please enter 'yes' or 'no'.")
+
