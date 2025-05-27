@@ -1,0 +1,55 @@
+def is_complete_graph(adj_matrix):
+    """
+    Check if the given adjacency matrix represents a complete graph
+    
+    Args:
+        adj_matrix (list of lists): Adjacency matrix representation of the graph
+        
+    Returns:
+        bool: True if the graph is complete, False otherwise
+    """
+    n = len(adj_matrix)
+    
+    for i in range(n):
+        for j in range(n):
+            # No self-loops in complete graphs
+            if i == j:
+                if adj_matrix[i][j] != 0:
+                    return False
+            # All other vertices must be connected
+            else:
+                if adj_matrix[i][j] != 1:
+                    return False
+    return True
+
+def main():
+    print("Enter the adjacency matrix for the graph (space-separated values, one row per line):")
+    print("Enter 'done' when finished")
+    
+    adj_matrix = []
+    while True:
+        row_input = input().strip()
+        if row_input.lower() == 'done':
+            break
+        
+        try:
+            row = list(map(int, row_input.split()))
+            adj_matrix.append(row)
+        except ValueError:
+            print("Invalid input. Please enter only 0s and 1s separated by spaces.")
+            continue
+    
+    # Validate matrix is square
+    n = len(adj_matrix)
+    for row in adj_matrix:
+        if len(row) != n:
+            print("Error: Adjacency matrix must be square (same number of rows and columns)")
+            return
+    
+    if is_complete_graph(adj_matrix):
+        print("\nThe graph is a complete graph (every pair of distinct vertices is connected)")
+    else:
+        print("\nThe graph is NOT a complete graph")
+
+if __name__ == "__main__":
+    main()
