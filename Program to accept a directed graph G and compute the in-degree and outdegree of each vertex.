@@ -1,0 +1,63 @@
+from collections import defaultdict
+
+def compute_degrees(graph):
+    """
+    Compute in-degree and out-degree for each vertex in a directed graph
+    
+    Args:
+        graph (dict): Adjacency list representation of the directed graph
+        
+    Returns:
+        dict: Dictionary with vertices as keys and (in_degree, out_degree) as values
+    """
+    in_degree = defaultdict(int)
+    out_degree = defaultdict(int)
+    
+    # Calculate out-degree (number of outgoing edges)
+    for vertex in graph:
+        out_degree[vertex] = len(graph[vertex])
+        
+    # Calculate in-degree (number of incoming edges)
+    for vertex in graph:
+        for neighbor in graph[vertex]:
+            in_degree[neighbor] += 1
+    
+    # Combine results for all vertices (including those with zero in/out degrees)
+    all_vertices = set(graph.keys()).union(
+        {v for neighbors in graph.values() for v in neighbors}
+    )
+    
+    degrees = {}
+    for v in sorted(all_vertices):
+        degrees[v] = (in_degree.get(v, 0), out_degree.get(v, 0))
+    
+    return degrees
+
+def main():
+    # Get graph input from user
+    graph = defaultdict(list)
+    print("Enter the directed graph (enter 'done' when finished):")
+    
+    while True:
+        edge = input("Enter an edge as 'source destination' (e.g., 'A B'): ").strip()
+        if edge.lower() == 'done':
+            break
+        
+        try:
+            source, dest = edge.split()
+            graph[source].append(dest)
+        except ValueError:
+            print("Invalid input. Please enter edges in the format 'source destination'")
+            continue
+    
+    # Compute degrees
+    degrees = compute_degrees(graph)
+    
+    # Display results
+    print("\nVertex\tIn-Degree\tOut-Degree")
+    print("----------------------------------")
+    for vertex, (in_d, out_d) in degrees.items():
+        print(f"{vertex}\t{in_d}\t\t{out_d}")
+
+if __name__ == "__main__":
+    main()
