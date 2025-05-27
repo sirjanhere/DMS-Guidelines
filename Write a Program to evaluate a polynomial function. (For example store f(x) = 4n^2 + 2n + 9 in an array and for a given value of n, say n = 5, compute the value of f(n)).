@@ -1,0 +1,39 @@
+# Define a function called 'evaluate_polynomial' that takes two arguments:
+# - 'poly': a list of polynomial coefficients (ordered from x⁰ to xⁿ)
+# - 'n': the value at which the polynomial should be evaluated
+def evaluate_polynomial(poly, n):
+    # Initialize 'result' to 0. This will accumulate the sum of each polynomial term.
+    result = 0
+    
+    # Loop through each coefficient in 'poly' using 'enumerate', which provides:
+    # - 'power': the exponent (0 for x⁰, 1 for x¹, etc.)
+    # - 'coeff': the coefficient for that term
+    for power, coeff in enumerate(poly):
+        # For each term, calculate: coefficient × (n^power) and add it to 'result'
+        result += coeff * (n ** power)
+    
+    # Return the final computed value of the polynomial at 'n'
+    return result
+
+# Ask the user for the polynomial coefficients
+# Create an empty list 'polynomial' to store coefficients
+polynomial = []
+
+# Prompt the user to enter the polynomial's degree (highest power of x)
+degree = int(input("Enter the degree of the polynomial: "))
+
+# Loop from 0 to 'degree' (inclusive) to collect each coefficient
+for i in range(degree + 1):
+    # Ask the user for the coefficient of x^i (e.g., x⁰, x¹, etc.)
+    coeff = float(input(f"Enter the coefficient for x^{i}: "))
+    # Append the coefficient to the 'polynomial' list
+    polynomial.append(coeff)
+
+# Ask the user for the value 'n' at which to evaluate the polynomial
+n = float(input("Enter the value of n: "))
+
+# Call 'evaluate_polynomial' with the user-provided coefficients and 'n'
+value = evaluate_polynomial(polynomial, n)
+
+# Print the result in a formatted string
+print(f"The value of the polynomial at n = {n} is: {value}")
