@@ -1,0 +1,22 @@
+def pigeonhole_principle():
+    # Get input from user
+    items = list(map(int, input("Enter the items (space-separated): ").split()))
+    num_pigeonholes = int(input("Enter the number of pigeonholes: "))
+
+    # Initialize all pigeonholes
+    pigeonholes = {i: [] for i in range(num_pigeonholes)}
+
+    # Distribute items into pigeonholes
+    for item in items:
+        hole = item % num_pigeonholes
+        pigeonholes[hole].append(item)
+
+    # Display results
+    print("\nPigeonhole distribution:")
+    for hole in range(num_pigeonholes):
+        print(f"Pigeonhole {hole}: {pigeonholes[hole]}")
+        if len(pigeonholes[hole]) > 1:
+            print(f"--> Pigeonhole {hole} contains multiple items, proving the principle!")
+
+# Run the function
+pigeonhole_principle()
