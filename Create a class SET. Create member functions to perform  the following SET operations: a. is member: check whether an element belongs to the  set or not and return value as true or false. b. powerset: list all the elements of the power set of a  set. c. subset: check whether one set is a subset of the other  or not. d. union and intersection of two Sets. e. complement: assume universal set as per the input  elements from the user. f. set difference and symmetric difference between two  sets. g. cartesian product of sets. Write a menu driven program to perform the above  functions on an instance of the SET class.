@@ -1,64 +1,86 @@
-from itertools import chain, combinations 
-class SET: 
- def __init__(self, elements): 
- self.elements = set(elements) 
- def is_member(self, element): 
- return element in self.elements 
- def powerset(self): 
- return list(chain.from_iterable(combinations(self.elements, r) for r in  range(len(self.elements) + 1))) 
- def is_subset(self, other_set): 
- return self.elements.issubset(other_set.elements) 
- def union(self, other_set): 
- return self.elements.union(other_set.elements) 
- def intersection(self, other_set): 
- return self.elements.intersection(other_set.elements) 
- def set_difference(self, other_set): 
- return self.elements.difference(other_set.elements) 
- def symmetric_difference(self, other_set): 
- return self.elements.symmetric_difference(other_set.elements) 
- def cartesian_product(self, other_set): 
- return {(a, b) for a in self.elements for b in other_set.elements} def main():
-5 
- # Input sets from user 
- elements1 = list(map(int, input("Enter elements of Set 1 separated by space:  ").split())) 
- elements2 = list(map(int, input("Enter elements of Set 2 separated by space:  ").split())) 
- set1 = SET(elements1) 
- set2 = SET(elements2) 
- element = int(input("Enter an element to check membership in Set 1 or Set 2: ")) 
- while True: 
- print("\nMenu:") 
- print("1. Check if the element is a member of Set 1 or Set 2")  print("2. List all elements of the power set of Set 1 or Set 2")  print("3. Check if Set 1 is a subset of Set 2") 
- print("4. Union of Set 1 and Set 2") 
- print("5. Intersection of Set 1 and Set 2") 
- print("6. Set difference between Set 1 and Set 2") 
- print("7. Symmetric difference between Set 1 and Set 2") 
- print("8. Cartesian product of Set 1 and Set 2") 
- print("9. Exit") 
- choice = int(input("Enter your choice: ")) 
- if choice == 1: 
- set_choice = int(input("Check in (1) Set 1 or (2) Set 2: "))  if set_choice == 1: 
- print("Member" if set1.is_member(element) else "Not a member")  else: 
- print("Member" if set2.is_member(element) else "Not a member")  elif choice == 2: 
- set_choice = int(input("Power set of (1) Set 1 or (2) Set 2: "))  if set_choice == 1: 
- print("Power set of Set 1:", set1.powerset()) 
- else: 
- print("Power set of Set 2:", set2.powerset()) 
- elif choice == 3: 
- print("Set 1 is a subset of Set 2" if set1.is_subset(set2) else "Set 1 is  not a subset of Set 2") 
- elif choice == 4: 
- print("Union of Set 1 and Set 2:", set1.union(set2)) 
- elif choice == 5: 
- print("Intersection of Set 1 and Set 2:", set1.intersection(set2))  elif choice == 6: 
- print("Set difference between Set 1 and Set 2:",  
-set1.set_difference(set2)) 
- elif choice == 7: 
- print("Symmetric difference between Set 1 and Set 2:",  set1.symmetric_difference(set2)) 
- elif choice == 8: 
- print("Cartesian product of Set 1 and Set 2:",  
-set1.cartesian_product(set2)) 
- elif choice == 9: 
- break 
- else: 
- print("Invalid choice! Please try again.") 
-if __name__ == "__main__": 
- main()
+from itertools import chain, combinations
+
+class SET:
+    def __init__(self, elements):
+        self.elements = set(elements)
+
+    def is_member(self, element):
+        return element in self.elements
+
+    def powerset(self):
+        return list(chain.from_iterable(combinations(self.elements, r) for r in range(len(self.elements) + 1)))
+
+    def is_subset(self, other_set):
+        return self.elements.issubset(other_set.elements)
+
+    def union(self, other_set):
+        return self.elements.union(other_set.elements)
+
+    def intersection(self, other_set):
+        return self.elements.intersection(other_set.elements)
+
+    def set_difference(self, other_set):
+        return self.elements.difference(other_set.elements)
+
+    def symmetric_difference(self, other_set):
+        return self.elements.symmetric_difference(other_set.elements)
+
+    def cartesian_product(self, other_set):
+        return {(a, b) for a in self.elements for b in other_set.elements}
+
+def main():
+    # Input sets from user
+    elements1 = list(map(int, input("Enter elements of Set 1 separated by space: ").split()))
+    elements2 = list(map(int, input("Enter elements of Set 2 separated by space: ").split()))
+
+    set1 = SET(elements1)
+    set2 = SET(elements2)
+
+    element = int(input("Enter an element to check membership in Set 1 or Set 2: "))
+
+    while True:
+        print("\nMenu:")
+        print("1. Check if the element is a member of Set 1 or Set 2")
+        print("2. List all elements of the power set of Set 1 or Set 2")
+        print("3. Check if Set 1 is a subset of Set 2")
+        print("4. Union of Set 1 and Set 2")
+        print("5. Intersection of Set 1 and Set 2")
+        print("6. Set difference between Set 1 and Set 2")
+        print("7. Symmetric difference between Set 1 and Set 2")
+        print("8. Cartesian product of Set 1 and Set 2")
+        print("9. Exit")
+
+        choice = int(input("Enter your choice: "))
+
+        if choice == 1:
+            set_choice = int(input("Check in (1) Set 1 or (2) Set 2: "))
+            if set_choice == 1:
+                print("Member" if set1.is_member(element) else "Not a member")
+            else:
+                print("Member" if set2.is_member(element) else "Not a member")
+        elif choice == 2:
+            set_choice = int(input("Power set of (1) Set 1 or (2) Set 2: "))
+            if set_choice == 1:
+                print("Power set of Set 1:", set1.powerset())
+            else:
+                print("Power set of Set 2:", set2.powerset())
+        elif choice == 3:
+            print("Set 1 is a subset of Set 2" if set1.is_subset(set2) else "Set 1 is not a subset of Set 2")
+        elif choice == 4:
+            print("Union of Set 1 and Set 2:", set1.union(set2))
+        elif choice == 5:
+            print("Intersection of Set 1 and Set 2:", set1.intersection(set2))
+        elif choice == 6:
+            print("Set difference between Set 1 and Set 2:", set1.set_difference(set2))
+        elif choice == 7:
+            print("Symmetric difference between Set 1 and Set 2:", set1.symmetric_difference(set2))
+        elif choice == 8:
+            print("Cartesian product of Set 1 and Set 2:", set1.cartesian_product(set2))
+        elif choice == 9:
+            break
+        else:
+            print("Invalid choice! Please try again.")
+
+if __name__ == "__main__":
+    main()
+
