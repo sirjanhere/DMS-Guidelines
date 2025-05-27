@@ -1,0 +1,28 @@
+# Function to verify if P(x) is true for all integers in a given range
+def verify_universal_quantifier(P, start, end):
+    for x in range(start, end + 1):
+        if not P(x):
+            print(f"P(x) is false for x = {x}")
+            return False
+    print(f"P(x) is true for all integers from {start} to {end}.")
+    return True
+
+# Ask the user for the function P(x)
+print("Define the function P(x). Use 'x' as the variable.")
+print("Example: To define P(x): x + 1 > x, type 'x + 1 > x'")
+P_expression = input("Enter the function P(x): ")
+
+# Convert the user's input into a lambda function
+try:
+    P = lambda x: eval(P_expression)
+except:
+    print("Invalid function. Please use 'x' as the variable and ensure the expression is valid.")
+    exit()
+
+# Ask the user for the range of integers
+start = int(input("Enter the start of the range (e.g., -1000): "))
+end = int(input("Enter the end of the range (e.g., 1000): "))
+
+# Verify the universal quantifier for the given range and function
+verify_universal_quantifier(P, start, end)
+
